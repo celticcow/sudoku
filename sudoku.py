@@ -11,8 +11,47 @@ def print_puzzle(grid):
         print("\n------------------")
 #end print_puzzle
 
+def solve(grid, row, col, num):
+    for x in range(9):
+        if(grid[row][x] == num):
+            return(False)
+    
+    for x in range(9):
+        if(grid[x][col] == num):
+            return(False)
+    
+    start_row = row - row % 3
+    start_col = col - col % 3
+
+    for i in range(3):
+        for j in range(3):
+            if(grid[i + start_row][j + start_col] == num):
+                return(False)
+    return(True)
+#end of solve
+
 def sudoku(grid, row, col):
-    pass
+    size = 9
+    if(row == size-1 and col == size):
+        return(True)
+    
+    if(col == size):
+        row = row + 1
+        col = 0
+    
+    if(grid[row][col] > 0):
+        return(sudoku(grid, row, col+1))
+    
+    for num in range(1, size+1, 1):
+        if(solve(grid, row, col, num)):
+            grid[row][col] = num
+
+            if(sudoku(grid, row, col+1)):
+                return(True)
+        grid[row][col] = 0
+    
+    return(False)
+#end of sudoku
 
 #end of sudoku
 
@@ -34,6 +73,12 @@ def main():
     ]
 
     print_puzzle(grid)
+
+    if(sudoku(grid, 0, 0)):
+        print("\n\n")
+        print_puzzle(grid)
+    else:
+        print("no solution found")
 
 #end of main
 

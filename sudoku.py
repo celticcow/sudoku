@@ -60,6 +60,19 @@ def main():
     #grid will be 9x9
     #0 (zero) will be square to be solved
 
+    grid2 = []
+    
+    row = []
+    for i in range(0,9):
+        print("Enter Row ", i)
+        for j in range(0,9):
+            ele = int(input())
+            row.append(ele)
+
+    
+        grid2.append(row)
+        row = []
+    """
     grid = [
         [2, 5, 0, 0, 3, 0, 9, 0, 1],
         [0, 1, 0, 0, 0, 4, 0, 0, 0],
@@ -71,14 +84,16 @@ def main():
         [0, 7, 0, 0, 0, 0, 0, 0, 3],
         [9, 0, 3, 0, 0, 0, 6, 0, 4]
     ]
+    """
+    print_puzzle(grid2)
 
-    print_puzzle(grid)
-
-    if(sudoku(grid, 0, 0)):
+    if(sudoku(grid2, 0, 0)):
         print("\n\n")
-        print_puzzle(grid)
+        print_puzzle(grid2)
     else:
         print("no solution found")
+    
+    #print(grid2)
 
 #end of main
 
